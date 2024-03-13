@@ -1,0 +1,114 @@
+#######################################################################################
+# This configuration was contributed by Eme Biv, thanks for his wisdom and hard work! #
+#######################################################################################
+
+##  You need to select 'Communication interface' to USB or CAN in 'make menuconfig'
+##  when you compile Klipper
+##	Obtain definition by "ls -l /dev/serial/by-id/" then unplug to verify
+##--------------------------------------------------------------------
+
+[mcu stridemax_dual_X]
+#serial: /dev/serial/by-id/usb-Klipper_rp2040_E66160F423669A37-if00
+#restart_method: command
+## Uncomment below if you're using the Raspberry CAN to communicate with stridemax_dual
+#canbus_uuid=ee8958c09cf9
+
+[mcu stridemax_dual_Y]
+#serial: /dev/serial/by-id/usb-Klipper_rp2040_E66160F423669A37-if00
+#restart_method: command
+## Uncomment below if you're using the Raspberry CAN to communicate with stridemax_dual
+#canbus_uuid=ee8958c09cf9
+
+#####################################################################
+#      X/Y Stepper Settings
+#####################################################################
+
+######## X ########
+[stepper_x] #Connected to MOT1
+step_pin: stridemax_dual_X:gpio13
+dir_pin: !stridemax_dual_X:gpio23
+enable_pin: !stridemax_dual_X:gpio22
+endstop_pin: stridemax_dual_X:gpio16
+position_endstop: 0
+position_min : 0
+position_max: 287
+homing_speed: 60
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+
+[tmc5160 stepper_x]
+spi_software_sclk_pin: stridemax_dual_X:gpio2
+spi_software_mosi_pin: stridemax_dual_X:gpio3
+spi_software_miso_pin: stridemax_dual_X:gpio4
+cs_pin: stridemax_dual_X:gpio21
+interpolate: False
+run_current: 1.6
+sense_resistor: 0.05
+#diag1_pin: stridemax_dual_X:gpio7
+##stealthchop_threshold: 0
+
+######## X1 ########
+[stepper_x1] #Connected to MOT0
+step_pin: stridemax_dual_X:gpio6
+dir_pin: !stridemax_dual_X:gpio5
+enable_pin: !stridemax_dual_X:gpio20
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+
+[tmc5160 stepper_x1] 
+spi_software_sclk_pin: stridemax_dual_X:gpio2
+spi_software_mosi_pin: stridemax_dual_X:gpio3
+spi_software_miso_pin: stridemax_dual_X:gpio4
+cs_pin: stridemax_dual_X:gpio1
+interpolate: True 
+run_current: 1.6
+sense_resistor: 0.05
+#diag1_pin: stridemax_dual_X:^gpio14
+##stealthchop_threshold: 0
+
+######## Y ########
+[stepper_y] #Connected to MOT1
+step_pin: stridemax_dual_Y:gpio13
+dir_pin: !stridemax_dual_Y:gpio23
+enable_pin: !stridemax_dual_Y:gpio22
+endstop_pin: stridemax_dual_Y:gpio16
+position_endstop: 0
+position_min : 0
+position_max: 298
+homing_speed: 60
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+
+[tmc5160 stepper_y]
+spi_software_sclk_pin: stridemax_dual_Y:gpio2
+spi_software_mosi_pin: stridemax_dual_Y:gpio3
+spi_software_miso_pin: stridemax_dual_Y:gpio4
+cs_pin: stridemax_dual_Y:gpio21
+interpolate: False
+run_current: 1.6
+sense_resistor: 0.05
+#diag1_pin: stridemax_dual_X:gpio7
+##stealthchop_threshold: 0
+
+######## Y1 ########
+[stepper_y1] #Connected to MOT0
+step_pin: stridemax_dual_Y:gpio6
+dir_pin: !stridemax_dual_Y:gpio5
+enable_pin: !stridemax_dual_Y:gpio20
+microsteps: 16
+rotation_distance: 40
+full_steps_per_rotation: 200
+
+[tmc5160 stepper_y1] 
+spi_software_sclk_pin: stridemax_dual_Y:gpio2
+spi_software_mosi_pin: stridemax_dual_Y:gpio3
+spi_software_miso_pin: stridemax_dual_Y:gpio4
+cs_pin: stridemax_dual_Y:gpio1
+interpolate: False
+run_current: 1.6
+sense_resistor: 0.05
+#diag1_pin: stridemax_dual_X:gpio7
+##stealthchop_threshold: 0
